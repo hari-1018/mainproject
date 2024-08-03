@@ -1,0 +1,270 @@
+{% extends 'admin.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>        <h3>DownloadsAdd</h3>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>registration - Bootsnipp.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'admission/z8b1X_data/bootstrap_002.css' %}" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+    body {
+     background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg') fixed;
+    background-size: cover;
+}
+
+*[role="form"] {
+    max-width: 530px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius: 0.3em;
+    background-color: #f2f2f2;
+}
+
+*[role="form"] h2 {
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #000000;
+    margin-top: 5%;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+
+    </style>
+    <script src="{% static 'admission/z8b1X_data/jquery.js' %}"></script>
+    <script src="{% static 'admission/z8b1X_data/bootstrap.js' %}"></script>
+    <script type="{% static 'admission/text/javascript' %}">
+        window.alert = function(){};
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css){
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
+        }
+        $( document ).ready(function() {
+          var iframe_height = parseInt($('html').height());
+          window.parent.postMessage( iframe_height, 'https://bootsnipp.com');
+        });
+
+    </script>
+</head>
+
+<body>
+<link href="{% static 'admission/z8b1X_data/bootstrap.css' %}" rel="stylesheet" id="bootstrap-css">
+<script src="{% static 'admission/z8b1X_data/bootstrap_002.js' %}"></script>
+<script src="{% static 'admission/z8b1X_data/jquery-2.js' %}"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+        <form class="form-horizontal" role="form" method="POST">{% csrf_token %}
+
+
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Course</label>
+            <div class="col-sm-9">
+                <select name="course" id="course" class="col-sm-12" required>
+
+                    <option value="">-- select course --</option>
+                    {% for i in key1 %}
+                    <option value="{{i.id}}">{{ i.coursename }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Batch</label>
+            <div class="col-sm-9">
+
+
+                   <select name="batch" id="batch" class="col-sm-12"  required>
+                       <option value="">-- select batch --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Subject</label>
+            <div class="col-sm-9">
+
+
+            <select name="subject" id="subject" class="col-sm-12" required>
+                       <option value="">-- select subject --</option>
+                   </select>
+
+            </div>
+        </div>
+                    <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Title</label>
+            <div class="col-sm-9">
+                <input type="text" id="email" placeholder="enter title" class="form-control" name="title" required>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="phoneNumber" class="col-sm-3 control-label">Description</label>
+            <div class="col-sm-9">
+                <input type="text" id="bloodgroup" placeholder="enter Description" class="form-control" name="description" required>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="phoneNumber" class="col-sm-3 control-label">Attachment</label>
+            <div class="col-sm-9">
+                <input type="file" id="bloodgroup" placeholder="" class="form-control" name="attachment" required>
+
+            </div>
+
+        </div>
+
+        <!-- /.form-group -->
+
+        <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
+            <input id="msg" value="{{key2}}" hidden>
+
+</form>
+    <!-- /form -->
+</div> <!-- ./container -->
+
+<script type="text/javascript">
+	$(function(){
+	$.validator.setDefaults({
+		highlight: function(element){
+			$(element)
+			.closest('.form-group')
+			.addClass('has-error')
+		},
+		unhighlight: function(element){
+			$(element)
+			.closest('.form-group')
+			.removeClass('has-error')
+		}
+	});
+
+	$.validate({
+		rules:
+		{
+		    password: "required",
+			birthDate: "required",
+			weight: {
+			    required:true,
+			    number:true
+			},
+			height:  {
+			    required:true,
+			    number:true
+			},
+			email: {
+				required: true,
+				email: true
+			}
+		},
+			messages:{
+				email: {
+				required: true,
+				email: true
+			}
+		},
+				password: {
+					required: " Please enter password"
+				},
+				birthDate: {
+					required: " Please enter birthdate"
+				},
+				email: {
+					required: ' Please enter email',
+					email: ' Please enter valid email'
+				},
+				weight: {
+					required: " Please enter your weight",
+					number: " Only numbers allowed"
+				},
+				height: {
+					required: " Please enter your height",
+					number: " Only numbers allowed"
+				},
+			}
+
+	});
+});
+</script>
+
+{% endblock %}
+ {% block script %}
+<script>
+
+function checkmyUser(data,usr){
+
+                    var subjectarray =[]
+                    var subjectarrayid =[]
+                  for (i=0; i<data.length; i++){
+
+                    if( data[i].courseid.id == usr){
+                    subjectarrayid.push(data[i].id);
+                    subjectarray.push(data[i].subject);
+                    }
+                  }
+                    var string2="<option>-- select subject --</option>"
+                    for (i=0; i<subjectarrayid.length; i++){
+                    string2=string2+"<option value='"+subjectarrayid[i]+"'>"+subjectarray[i]+"</option>"
+                    }
+                    document.getElementById("subject").innerHTML = string2;
+                  }
+function checkUser(data,usr){
+                    var batcharray =[]
+                    var batcharrayid =[]
+                  for (i=0; i<data.length; i++){
+
+                    if( data[i].courseid.id == usr){
+                    batcharrayid.push(data[i].id);
+                    batcharray.push(data[i].batchname);
+                    }
+                  }
+                    var string="<option> -- select batch --</option>"
+                    for (i=0; i<batcharrayid.length; i++){
+                    string=string+"<option value='"+batcharrayid[i]+"'>"+batcharray[i]+"</option>"
+                    }
+                    document.getElementById("batch").innerHTML = string;
+
+                  }
+
+
+$("#course").on("change",function(){
+
+        var us = $("#course").val()
+        var ourRequest = new XMLHttpRequest();
+        var myRequest = new XMLHttpRequest();
+        ourRequest.open('GET','/api/batchlist/')
+        myRequest.open('GET','/api/subjectlist1/'+us+'/')
+        ourRequest.onload = function(){
+                        var ourData = JSON.parse(ourRequest.responseText);
+                        checkUser(ourData,us);
+                      };
+        myRequest.onload = function(){
+
+                        var myData = JSON.parse(myRequest.responseText);
+                        console.log(myData);
+                        checkmyUser(myData,us);
+                      };
+                      myRequest.send();
+                      ourRequest.send();
+         });
+
+
+</script>
+
+{% endblock %}

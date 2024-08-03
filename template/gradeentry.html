@@ -1,0 +1,86 @@
+{% extends 'admin.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<h1>Grading</h1>
+      <br>
+   <div class="card">
+  <div class="card-body">
+<form method="post">{% csrf_token %}
+    <label for="name">Title</label>
+      <input type="text" name="title" placeholder="title">
+<button type='submit'  name='search' class="btn btn-secondary">Submit</button>
+</form>
+
+<button name="add" id="add" onclick="myFunction()" class='btn btn-success' style="float:right"> + </button>
+      <form method="POST" >{% csrf_token %}
+
+      <section class="content">
+    <div class="row">
+        <input type="text" name="title" value="{{title}}" id="title" hidden >
+
+         <table id="myTable" class="table table-bordered table-hover" value="1">
+
+                        <thead>
+                        <th>Grade</th>
+                        <th>MaxMark</th>
+                        <th>MinMark</th>
+
+                        </tr>
+                        </thead>
+         </table>
+  </div>
+      </section>
+              <button type="submit" name="submit" class="btn btn-secondary" style="float: right;">Submit</button>
+</form>
+  </div>
+   </div>
+  </div>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript">
+
+var j=1
+
+
+  function myFunction() {
+  var use =$("#title").val()
+  console.log(use)
+  var subRequest = new XMLHttpRequest();
+
+subRequest.open('GET','/api/subjectlist1/'+use+'/')
+
+        subRequest.onload = function(){
+                        var subData = JSON.parse(subRequest.responseText);
+                        checksubUser(subData,use);
+                      };
+                      subRequest.send();
+
+  var table = document.getElementById("myTable");
+  var rowCount=table.rows.length;
+  var row = table.insertRow(rowCount);
+  var cell1=row.insertCell(0)
+  var element1=document.createElement("input");
+  element1.type="text";
+  element1.name="grade"+j;
+  element1.id="grade"+j;
+  cell1.appendChild(element1);
+  var cell2=row.insertCell(1)
+  var element2=document.createElement("input");
+  element2.type="text";
+  element2.name="maxmark"+j;
+  element2.id="maxmark"+j;
+  cell2.appendChild(element2)
+  var cell3=row.insertCell(2)
+  var element3 = document.createElement('input');
+  element3.type = 'text';
+  element3.name = 'minmark'+j;
+  element3.id ='minmark'+j;
+  cell3.appendChild(element3);
+
+j++
+
+}
+       </script>
+
+
+    {% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'admin.html' %}
+{% block content %}
+<h1>TestSeriesView</h1><br>
+<a href="/institute/testseries_add/">
+    <button type="submit" >add</button></a>
+<div class="card">
+            <div class="card-header">
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+
+                <!-- /.card-header -->
+
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Title</th>
+                                    <th>Course</th>
+                                    <th>Batch</th>
+                                    <th>Subject</th>
+                                    <th>TotalTime</th>
+                                    <th>Status</th>
+                                    <th>Activate</th>
+
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+
+                                </tr>
+                        </thead>
+                        <tbody>
+
+                                {% for i in key %}
+
+                                <tr>
+                                    <td>{{i.id}}</td>
+                                    <td>{{ i.gradingsystems.Title }}</td>
+                                    <td>{{ i.course.coursename }}</td>
+                                    <td>{{ i.batch.batchname }}</td>
+                                    <td>{{ i.subject.subject }}</td>
+                                    <td>{{ i.Time }}</td>
+
+                                        <td>
+            {% if i.isactive == True %}
+            Published
+            {% else %}
+            NotPublished
+            {% endif %}
+
+        </td>
+                                    <td>
+                                    <form method='post'>{% csrf_token %}
+                <button type='submit' class="btn btn-secondary">
+                    {% if i.isactive == True %}
+
+                    NotPublished
+                    {% else %}
+                    Published
+                    {% endif %}
+                <input name="active"  value="{{i.id}}" hidden>
+                <input id="msg" value="{{key1}}" hidden>
+            </form>
+                                    </button>
+                                    </td>
+
+                                    <td><a href="/institute/editassignteacher/{{i.id}}/">
+                                    <button name="edit" type="submit" class="btn btn-success">Edit</button>
+                                    </a></td>
+                                    <td><form method="POST">{% csrf_token %}
+                                        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+            <input name="delete" value="{{i.id}}" hidden>
+
+                                    </form> </td>
+
+                                </tr>
+                                {% endfor %}
+                            <!--<table style="width:100%" border="1">-->
+
+                        </tbody>
+
+                    </table>
+        </div>
+    </div>
+{{ msg }}
+            <script>
+$(function () {
+    $('.button-checkbox').each(function () {
+
+        // Settings
+        var $widget = $(this),
+            $button = $widget.find('button'),
+            $checkbox = $widget.find('input:checkbox'),
+            color = $button.data('color'),
+            settings = {
+                on: {
+                    icon: 'glyphicon glyphicon-check'
+                },
+                off: {
+                    icon: 'glyphicon glyphicon-unchecked'
+                }
+            };
+
+        // Event Handlers
+        $button.on('click', function () {
+            $checkbox.prop('checked', !$checkbox.is(':checked'));
+            $checkbox.triggerHandler('change');
+            updateDisplay();
+        });
+        $checkbox.on('change', function () {
+            updateDisplay();
+        });
+
+        // Actions
+        function updateDisplay() {
+            var isChecked = $checkbox.is(':checked');
+
+            // Set the button's state
+            $button.data('state', (isChecked) ? "on" : "off");
+
+            // Set the button's icon
+            $button.find('.state-icon')
+                .removeClass()
+                .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+            // Update the button's color
+            if (isChecked) {
+                $button
+                    .removeClass('btn-default')
+                    .addClass('btn-' + color + ' active');
+            }
+            else {
+                $button
+                    .removeClass('btn-' + color + ' active')
+                    .addClass('btn-default');
+            }
+        }
+
+        // Initialization
+        function init() {
+
+            updateDisplay();
+
+            // Inject the icon if applicable
+            if ($button.find('.state-icon').length == 0) {
+                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+            }
+        }
+        init();
+    });
+});
+        </script>
+ {% endblock %}
+
+{% block script %}
+
+    <script>
+var x=document.getElementById("msg").value;
+ if (x=="yes"){
+    alert("NotPublished")}
+else if(x=="no"){
+    alert("Published")}
+
+</script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'admin.html' %}
+{% block content %}
+<h1><b>GradeView</h1>
+<br>
+        <div class="row mb-3">
+
+<a href="/institute/grade_entry/">
+    <button type="submit" style="float:right">Add</button></a></div>
+<form method="post">{% csrf_token %}
+    <label for="name">Title</label>
+      <input type="text" name="title" placeholder="title">
+<button type='submit'  name='search' class="btn btn-secondary">Submit</button>
+</form>
+
+
+
+<div class="card">
+<div class="card-body">
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+
+                    <table id="example2" class="table table-bordered table-hover">
+
+                        <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Delete</th>
+                                    <th>Edit</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+    {% for j in key1 %}
+<tr>
+    <td>{{ j.Title }} </td>
+        <td>                <form method ='post'>{% csrf_token %}
+
+        <button type="submit">Delete</button>
+        <input name="delete" value="{{ i.id }}" hidden>
+        </form>
+    </td>
+<td>
+        <a href="/institute/grade_edit/{{ i.id }}/">
+        <button type="submit" name="edit">Edit</button></a>
+    </td>
+</tr>
+    {% endfor %}
+                            <!--<table style="width:100%" border="1">-->
+
+                        </tbody>
+
+                    </table>
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+            {% endblock %}
+

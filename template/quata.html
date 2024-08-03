@@ -1,0 +1,61 @@
+{% extends 'admin.html' %}
+{% load static %}
+{% block content %}
+<h2>Add Quata</h2>
+<br>
+<div class="card">
+    <div class="card-body">
+
+<form method="post">{% csrf_token %}
+
+    <label for="uname"><b>Quata</b></label>
+    <input type="text" name="quata" placeholder="Enter quata" required>
+    <button type="submit" class="btn btn-secondary" name="submit">Submit</button>
+</form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <section class="content">
+    <div class="row">
+        <div class="col-12">
+            <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Quata</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+
+                                {% for i in quata %}
+
+                                <tr>
+                                    <td>{{ i.id }}</td>
+                                    <td>{{ i.AdmittedQuata }}</td>
+
+                                   <td><form method ='post'>{% csrf_token %}
+            <button type="submit" name="delete">Delete</button>
+            <input name="delete" value="{{i.id}}" hidden>
+        </form>
+        </td>
+        <td>
+            <a href="/home/editquata/{{i.id}}/">
+            <button type="submit">Edit</button>
+                </a>
+        </td>
+    </tr>
+    {% endfor %}
+                        </tbody>
+
+                    </table>
+        </div>
+        </div>
+        </section>
+        </div>
+    </div>
+
+{% endblock %}
